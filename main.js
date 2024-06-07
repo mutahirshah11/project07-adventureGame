@@ -1,37 +1,40 @@
-import inquirer from "inquirer";
-class Player {
-    name;
-    fuel = 100;
-    constructor(name) {
-        this.name = name;
-    }
-    fuelDecrease() {
-        let Fuel = this.fuel - 25;
-        this.fuel = Fuel;
-    }
-    fuelIncrease() {
+#! /usr/bin/env node
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+var inquirer_1 = require("inquirer");
+var Player = /** @class */ (function () {
+    function Player(name) {
         this.fuel = 100;
-    }
-}
-class Opponent {
-    name;
-    fuel = 100;
-    constructor(name) {
         this.name = name;
     }
-    fuelDecrease() {
-        let Fuel = this.fuel - 25;
+    Player.prototype.fuelDecrease = function () {
+        var Fuel = this.fuel - 25;
         this.fuel = Fuel;
+    };
+    Player.prototype.fuelIncrease = function () {
+        this.fuel = 100;
+    };
+    return Player;
+}());
+var Opponent = /** @class */ (function () {
+    function Opponent(name) {
+        this.fuel = 100;
+        this.name = name;
     }
-}
-let player = await inquirer.prompt([
+    Opponent.prototype.fuelDecrease = function () {
+        var Fuel = this.fuel - 25;
+        this.fuel = Fuel;
+    };
+    return Opponent;
+}());
+var player = await inquirer_1.default.prompt([
     {
         name: "PlayerName",
         type: "input",
         message: "Please enter your name"
     }
 ]);
-let opponent = await inquirer.prompt([
+var opponent = await inquirer_1.default.prompt([
     {
         name: "OpponentName",
         type: "list",
@@ -39,11 +42,11 @@ let opponent = await inquirer.prompt([
         choices: ["Skeleton", "Zombie", "Alien"]
     }
 ]);
-let p1 = new Player(player.PlayerName);
-let op1 = new Opponent(opponent.OpponentName);
+var p1 = new Player(player.PlayerName);
+var op1 = new Opponent(opponent.OpponentName);
 do {
     if (opponent.OpponentName === "Skeleton") {
-        let ask = await inquirer.prompt([
+        var ask = await inquirer_1.default.prompt([
             {
                 name: "Skeletonquestion",
                 type: "list",
@@ -52,11 +55,11 @@ do {
             }
         ]);
         if (ask.Skeletonquestion === "Attack") {
-            let num = Math.floor(Math.random() * 2);
+            var num = Math.floor(Math.random() * 2);
             if (num > 0) {
                 p1.fuelDecrease();
-                console.log(`${p1.name} fuel is ${p1.fuel}`);
-                console.log(`${op1.name} fuel is ${op1.fuel}`);
+                console.log("".concat(p1.name, " fuel is ").concat(p1.fuel));
+                console.log("".concat(op1.name, " fuel is ").concat(op1.fuel));
                 if (p1.fuel <= 0) {
                     console.log("You loose :( better luck next time ");
                     process.exit(); // to stop while loop
@@ -64,8 +67,8 @@ do {
             }
             if (num <= 0) {
                 op1.fuelDecrease();
-                console.log(`${p1.name} fuel is ${p1.fuel}`);
-                console.log(`${op1.name} fuel is ${op1.fuel}`);
+                console.log("".concat(p1.name, " fuel is ").concat(p1.fuel));
+                console.log("".concat(op1.name, " fuel is ").concat(op1.fuel));
                 if (op1.fuel <= 0) {
                     console.log("You won !! ");
                     process.exit(); // to stop while loop
@@ -74,7 +77,7 @@ do {
         }
         if (ask.Skeletonquestion === "Drink Portion") {
             p1.fuelIncrease();
-            console.log(`You drank health Portion now your fuel is ${p1.fuel}`);
+            console.log("You drank health Portion now your fuel is ".concat(p1.fuel));
         }
         if (ask.Skeletonquestion === "Run") {
             console.log("You loose :( better luck next time .");
@@ -82,7 +85,7 @@ do {
         }
     }
     if (opponent.OpponentName === "Zombie") {
-        let ask = await inquirer.prompt([
+        var ask = await inquirer_1.default.prompt([
             {
                 name: "Zombiequestion",
                 type: "list",
@@ -91,11 +94,11 @@ do {
             }
         ]);
         if (ask.Zombiequestion === "Attack") {
-            let num = Math.floor(Math.random() * 2);
+            var num = Math.floor(Math.random() * 2);
             if (num > 0) {
                 p1.fuelDecrease();
-                console.log(`${p1.name} fuel is ${p1.fuel}`);
-                console.log(`${op1.name} fuel is ${op1.fuel}`);
+                console.log("".concat(p1.name, " fuel is ").concat(p1.fuel));
+                console.log("".concat(op1.name, " fuel is ").concat(op1.fuel));
                 if (p1.fuel <= 0) {
                     console.log("You loose :( better luck next time ");
                     process.exit(); // to stop while loop
@@ -103,8 +106,8 @@ do {
             }
             if (num <= 0) {
                 op1.fuelDecrease();
-                console.log(`${p1.name} fuel is ${p1.fuel}`);
-                console.log(`${op1.name} fuel is ${op1.fuel}`);
+                console.log("".concat(p1.name, " fuel is ").concat(p1.fuel));
+                console.log("".concat(op1.name, " fuel is ").concat(op1.fuel));
                 if (op1.fuel <= 0) {
                     console.log("You won !! ");
                     process.exit(); // to stop while loop
@@ -113,7 +116,7 @@ do {
         }
         if (ask.Zombiequestion === "Drink Portion") {
             p1.fuelIncrease();
-            console.log(`You drank health Portion now your fuel is ${p1.fuel}`);
+            console.log("You drank health Portion now your fuel is ".concat(p1.fuel));
         }
         if (ask.Zombiequestion === "Run") {
             console.log("You loose :( better luck next time .");
@@ -121,7 +124,7 @@ do {
         }
     }
     if (opponent.OpponentName === "Alien") {
-        let ask = await inquirer.prompt([
+        var ask = await inquirer_1.default.prompt([
             {
                 name: "Alienquestion",
                 type: "list",
@@ -130,11 +133,11 @@ do {
             }
         ]);
         if (ask.Alienquestion === "Attack") {
-            let num = Math.floor(Math.random() * 2);
+            var num = Math.floor(Math.random() * 2);
             if (num > 0) {
                 p1.fuelDecrease();
-                console.log(`${p1.name} fuel is ${p1.fuel}`);
-                console.log(`${op1.name} fuel is ${op1.fuel}`);
+                console.log("".concat(p1.name, " fuel is ").concat(p1.fuel));
+                console.log("".concat(op1.name, " fuel is ").concat(op1.fuel));
                 if (p1.fuel <= 0) {
                     console.log("You loose :( better luck next time ");
                     process.exit(); // to stop while loop
@@ -142,8 +145,8 @@ do {
             }
             if (num <= 0) {
                 op1.fuelDecrease();
-                console.log(`${p1.name} fuel is ${p1.fuel}`);
-                console.log(`${op1.name} fuel is ${op1.fuel}`);
+                console.log("".concat(p1.name, " fuel is ").concat(p1.fuel));
+                console.log("".concat(op1.name, " fuel is ").concat(op1.fuel));
                 if (op1.fuel <= 0) {
                     console.log("You won !! ");
                     process.exit(); // to stop while loop
@@ -152,7 +155,7 @@ do {
         }
         if (ask.Alienquestion === "Drink Portion") {
             p1.fuelIncrease();
-            console.log(`You drank health Portion now your fuel is ${p1.fuel}`);
+            console.log("You drank health Portion now your fuel is ".concat(p1.fuel));
         }
         if (ask.Alienquestion === "Run") {
             console.log("You loose :( better luck next time .");
